@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080610">
+<title>ZXX_YOURS | Poetry Universe</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--bg:#080610;
+--purple:#bd91ff;
+--muted:#b9adc9;
+--panel:#151020;
+}
+html{scroll-behavior:smooth}
+body{
+background:var(--bg);
+color:white;
+font-family:Georgia,serif;
+overflow-x:hidden;
+}
+a{text-decoration:none;color:inherit}
+.container{width:90%;max-width:1100px;margin:auto}
+
+/* STARS */
+#stars{
+position:fixed;inset:0;
+pointer-events:none;overflow:hidden;
+z-index:0;
+}
+.star{
+position:absolute;
+background:white;
+border-radius:50%;
+animation:twinkle 3s infinite alternate;
+}
+@keyframes twinkle{
+from{opacity:.1;transform:scale(.6)}
+to{opacity:1;transform:scale(1.5)}
+}
+nav,header,main,footer{position:relative;z-index:1}
+
+/* NAVBAR */
+nav{
+display:flex;justify-content:space-between;
+align-items:center;padding:22px 0;
+border-bottom:1px solid #30243d;
+flex-wrap:wrap;gap:15px;
+}
+.logo{
+color:var(--purple);font-size:20px;
+letter-spacing:4px;font-weight:bold;
+}
+.links{display:flex;gap:15px;flex-wrap:wrap}
+.links a{
+font:11px Arial;color:var(--muted);
+letter-spacing:1px;
+}
+
+/* HERO */
+.hero{
+min-height:85vh;display:flex;
+flex-direction:column;align-items:center;
+justify-content:center;text-align:center;
+padding:60px 10px;
+background:radial-gradient(ellipse at center,
+#42245e 0%,#1b112a 40%,transparent 75%);
+}
+.moon{
+width:105px;height:105px;border-radius:50%;
+background:radial-gradient(circle at 35% 35%,
+#fff,#e4caff 30%,#a66bff 65%,#57317c);
+box-shadow:0 0 30px #bd91ff,0 0 90px #8c4bd9;
+margin-bottom:35px;
+animation:moonGlow 4s infinite alternate;
+}
+@keyframes moonGlow{
+to{box-shadow:0 0 55px #bd91ff,0 0 120px #8c4bd9}
+}
+.kicker{
+color:var(--purple);font:11px Arial;
+letter-spacing:5px;
+}
+.hero h1{
+font-size:clamp(45px,11vw,95px);
+letter-spacing:5px;margin:25px 0;
+text-shadow:0 0 30px #bd91ff80;
+}
+.hero p{
+color:#d1c3df;font-size:18px;
+font-style:italic;line-height:1.8;
+max-width:550px;
+}
+
+/* BUTTONS */
+.btn{
+display:inline-block;
+border:1px solid var(--purple);
+color:white;background:transparent;
+padding:13px 21px;margin:12px 5px;
+font:11px Arial;letter-spacing:1.5px;
+cursor:pointer;transition:.3s;
+}
+.btn:hover,.btn.primary{
+background:var(--purple);color:#10091b;
+box-shadow:0 0 25px #bd91ff60;
+}
+
+/* SECTIONS */
+section{
+padding:75px 0;
+border-top:1px solid #30243d;
+}
+.tag{
+color:var(--purple);
+font:11px Arial;letter-spacing:4px;
+}
+h2{
+font-size:clamp(30px,6vw,45px);
+font-weight:normal;margin:18px 0;
+}
+.description{
+color:var(--muted);line-height:1.9;
+font-size:16px;max-width:750px;
+}
+
+/* POETRY FILTER */
+.poetry-filter{
+display:flex;flex-wrap:wrap;
+gap:10px;margin:25px 0;
+}
+.filter-btn{
+border:1px solid var(--purple);
+color:var(--purple);
+background:transparent;
+padding:11px 20px;cursor:pointer;
+}
+.filter-btn.active{
+background:var(--purple);color:#080610;
+}
+
+/* POETRY CARDS */
+.grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+}
+.poetry-card{
+background:linear-gradient(145deg,#21162f,#100d18);
+border:1px solid #49345f;
+padding:28px 20px;
+transition:.3s;
+box-shadow:0 0 15px #7d42a510;
+}
+.poetry-card:hover{
+transform:translateY(-5px);
+box-shadow:0 0 25px #bd91ff35;
+}
+.poetry-card h3{
+color:var(--purple);
+margin-bottom:18px;letter-spacing:2px;
+}
+.poetry-card p{
+color:#e1d6ed;line-height:2;
+font-style:italic;
+}
+.extra{display:none;margin-top:10px}
+.extra.show{display:block}
+.read-more{
+margin-top:16px;
+color:var(--purple);
+background:none;border:none;
+cursor:pointer;font-size:13px;
+}
+
+/* MEDIA GALLERY */
+.media-grid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;margin-top:30px;
+}
+.media-card{
+border:1px solid #49345f;
+background:var(--panel);
+overflow:hidden;
+}
+.media-cover{
+min-height:190px;
+display:flex;align-items:center;
+justify-content:center;
+background:radial-gradient(circle,#583779,#171020 70%);
+font-size:45px;
+}
+.media-info{padding:22px}
+.media-info h3{
+color:var(--purple);margin-bottom:10px;
+}
+.media-info p{
+color:var(--muted);
+line-height:1.7;font-size:14px;
+}
+
+/* SOCIAL */
+.social-card{
+border:1px solid #49345f;
+background:var(--panel);
+padding:25px;margin-top:18px;
+}
+.social-card h3{
+color:var(--purple);margin-bottom:12px;
+}
+.social-card p{
+color:var(--muted);line-height:1.8;
+}
+
+/* FOOTER */
+footer{
+text-align:center;padding:35px 10px;
+color:var(--muted);font:11px Arial;
+letter-spacing:2px;
+border-top:1px solid #30243d;
+}
+
+/* PRINT / PDF */
+@media print{
+@page{size:A4;margin:15mm}
+body{
+background:white!important;
+color:#171020!important;
+}
+#stars,nav,.moon,.btn,.poetry-filter,
+.read-more{display:none!important}
+.hero{
+min-height:auto;background:white!important;
+padding:30px 0;
+}
+.hero h1{color:#57317c!important}
+.hero p,.description,
+.poetry-card p,.media-info p{color:#333!important}
+section{
+padding:25px 0;border-color:#ddd;
+break-inside:avoid;
+}
+.poetry-card,.media-card,.social-card{
+background:white!important;
+border:1px solid #aaa;
+break-inside:avoid;
+}
+.extra{display:block!important}
+h2,h3,.tag,.poetry-card h3{
+color:#57317c!important;
+}
+footer{color:#333!important}
+}
+
+@media(max-width:600px){
+.grid,.media-grid{grid-template-columns:1fr}
+nav{flex-direction:column}
+.hero{min-height:75vh}
+}
+</style>
+</head>
+
+<body>
+
+<div id="stars"></div>
+
+<div class="container">
+
+<nav>
+<div class="logo">ZXX_YOURS</div>
+<div class="links">
+<a href="#about">ABOUT</a>
+<a href="#poetry">POETRY</a>
+<a href="#gallery">GALLERY</a>
+<a href="#social">SOCIAL</a>
+</div>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+
+<div class="moon"></div>
+
+<div class="kicker">WELCOME TO MY UNIVERSE</div>
+
+<h1>ZXX_YOURS</h1>
+
+<p>
+Some feelings are too deep for conversations,
+so they become poetry.
+</p>
+
+<div>
+<a class="btn primary" href="#poetry">EXPLORE POETRY</a>
+<a class="btn" href="#gallery">MY CREATIONS</a>
+</div>
+
+<button class="btn" onclick="downloadPDF()">
+DOWNLOAD PORTFOLIO PDF ↓
+</button>
+
+</header>
+
+<main>
+
+<!-- ABOUT -->
+<section id="about">
+
+<div class="tag">01 / ABOUT ME</div>
+
+<h2>A World Of Emotions</h2>
+
+<p class="description">
+Welcome to ZXX_YOURS.
+
+A creative universe where words express
+emotions that silence cannot explain.
+
+Hindi Shayari, English Poetry,
+Cinematic Reels and Stories.
+
+Two languages. One world of feelings.
+</p>
+
+</section>
+
+<!-- POETRY -->
+<section id="poetry">
+
+<div class="tag">02 / MY CREATIONS</div>
+
+<h2>Poetry Collection</h2>
+
+<div class="poetry-filter">
+
+<button class="filter-btn active"
+onclick="filterPoetry('all',this)">ALL</button>
+
+<button class="filter-btn"
+onclick="filterPoetry('hindi',this)">HINDI</button>
+
+<button class="filter-btn"
+onclick="filterPoetry('english',this)">ENGLISH</button>
+
+</div>
+
+<div class="grid">
+
+<div class="poetry-card" data-language="hindi">
+<h3>KHAMOSHI</h3>
+<p>
+Kuch baatein lab tak aati nahi,<br>
+Kuch yaadein dil se jaati nahi.
+</p>
+<div class="extra">
+<p>
+Khamoshi bhi keh deti hai sab,<br>
+Har kahani alfaazon mein aati nahi.
+</p>
+</div>
+<button class="read-more" onclick="readMore(this)">READ MORE +</button>
+</div>
+
+<div class="poetry-card" data-language="hindi">
+<h3>UMEED</h3>
+<p>
+Raat gehri ho toh hone do,<br>
+Khwaabon ka diya jalne do.
+</p>
+<div class="extra">
+<p>
+Raaste khud mil jaayenge,<br>
+Bas dil ko chalne do.
+</p>
+</div>
+<button class="read-more" onclick="readMore(this)">READ MORE +</button>
+</div>
+
+<div class="poetry-card" data-language="hindi">
+<h3>EHSAAS</h3>
+<p>
+Har ehsaas ko naam nahi milta,<br>
+Har khwaab ko mukaam nahi milta.
+</p>
+<div class="extra">
+<p>
+Kuch log dil mein reh jaate hain,<br>
+Jinse dobara salaam nahi milta.
+</p>
+</div>
+<button class="read-more" onclick="readMore(this)">READ MORE +</button>
+</div>
+
+<div class="poetry-card" data-language="hindi">
+<h3>ADHOORI KAHANI</h3>
+<p>
+Kuch panne abhi khaali hain,<br>
+Kuch yaadein abhi sawaali hain.
+</p>
+<div class="extra">
+<p>
+Kahani khatam nahi hui,<br>
+Bas kuch baatein adhoori hain.
+</p>
+</div>
+<button class="read-more" onclick="readMore(this)">READ MORE +</button>
+</div>
+
+<div class="poetry-card" data-language="english">
+<h3>UNSPOKEN FEELINGS</h3>
+<p>
+Some words are never spoken,<br>
+Some hearts are never understood.
+</p>
+<div class="extra">
+<p>
+Behind every silent smile,<br>
+Lives a story untold.
+</p>
+</div>
+<button class="read-more" onclick="readMore(this)">READ MORE +</button>
+</div>
+
+<div class="poetry-card" data-language="english">
+<h3>LOST IN MEMORIES</h3>
+<p>
+I found you in the silence,<br>
+I lost you in the crowd.
+</p>
+<div class="extra">
+<p>
+Some memories speak softly,<br>
+But their echoes are loud.
+</p>
+</div>
+<button class="read-more" onclick="readMore(this)">READ MORE +</button>
+</div>
+
+<div class="poetry-card" data-language="english">
+<h3>THE LAST STAR</h3>
+<p>
+Even when the sky turns grey,<br>
+A little star still finds its way.
+</p>
+<div class="extra">
+<p>
+Darkness never owns the night,<br>
+Every soul deserves its light.
+</p>
+</div>
+<button class="read-more" onclick="readMore(this)">READ MORE +</button>
+</div>
+
+<div class="poetry-card" data-language="english">
+<h3>BEYOND WORDS</h3>
+<p>
+Not every feeling needs a name,<br>
+Not every heart plays the same.
+</p>
+<div class="extra">
+<p>
+Some emotions live inside,<br>
+Where words and silence collide.
+</p>
+</div>
+<button class="read-more" onclick="readMore(this)">READ MORE +</button>
+</div>
+
+</div>
+
+<p class="description" style="font-size:12px;margin-top:20px">
+Sample verses: replace these with your own original poetry.
+</p>
+
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+
+<div class="tag">03 / VISUAL STORIES</div>
+
+<h2>My Creative Gallery</h2>
+
+<p class="description">
+Poetry in words. Emotions in visuals.
+Explore my content on Instagram and YouTube.
+</p>
+
+<div class="media-grid">
+
+<div class="media-card">
+<div class="media-cover">▶</div>
+<div class="media-info">
+<h3>Instagram Reels</h3>
+<p>Cinematic poetry, shayari and emotional edits.</p>
+<a class="btn"
+href="https://instagram.com/zxx_yours"
+target="_blank">WATCH REELS ↗</a>
+</div>
+</div>
+
+<div class="media-card">
+<div class="media-cover">▶</div>
+<div class="media-info">
+<h3>YouTube Videos</h3>
+<p>Poetry videos, quotes and creative storytelling.</p>
+<a class="btn"
+href="https://youtube.com/@zxx_yours"
+target="_blank">WATCH VIDEOS ↗</a>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social">
+
+<div class="tag">04 / CONNECT WITH ME</div>
+
+<h2>Follow My Journey</h2>
+
+<div class="social-card">
+<h3>INSTAGRAM</h3>
+<p>Poetry | Shayari | Cinematic Reels</p>
+<p>@zxx_yours</p>
+<a class="btn"
+href="https://instagram.com/zxx_yours"
+target="_blank">VISIT INSTAGRAM ↗</a>
+</div>
+
+<div class="social-card">
+<h3>YOUTUBE</h3>
+<p>Poetry Videos | Emotional Edits</p>
+<p>@zxx_yours</p>
+<a class="btn"
+href="https://youtube.com/@zxx_yours"
+target="_blank">VISIT YOUTUBE ↗</a>
+</div>
+
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+
+<div class="tag">05 / COLLABORATION</div>
+
+<h2>Let's Create Something Meaningful.</h2>
+
+<p class="description">
+For creative collaborations, poetry features
+and enquiries, connect with me on Instagram.
+</p>
+
+<a class="btn"
+href="https://instagram.com/zxx_yours"
+target="_blank">CONTACT ME</a>
+
+</section>
+
+</main>
+
+<footer>
+© 2026 ZXX_YOURS
+<br><br>
+POETRY IS THE LANGUAGE OF THE SOUL.
+</footer>
+
+</div>
+
+<script>
+
+/* CREATE STARS */
+const stars = document.getElementById("stars");
+
+for(let i=0;i<100;i++){
+  const star=document.createElement("div");
+  star.className="star";
+
+  star.style.left=Math.random()*100+"%";
+  star.style.top=Math.random()*100+"%";
+  star.style.width=(Math.random()*2+1)+"px";
+  star.style.height=star.style.width;
+  star.style.animationDelay=Math.random()*4+"s";
+
+  stars.appendChild(star);
+}
+
+/* POETRY FILTER */
+function filterPoetry(language,button){
+
+  const cards=document.querySelectorAll(".poetry-card");
+
+  cards.forEach(card=>{
+    if(language==="all" ||
+       card.dataset.language===language){
+      card.style.display="block";
+    }else{
+      card.style.display="none";
+    }
+  });
+
+  document.querySelectorAll(".filter-btn")
+  .forEach(btn=>btn.classList.remove("active"));
+
+  button.classList.add("active");
+}
+
+/* READ MORE */
+function readMore(button){
+
+  const extra=button.previousElementSibling;
+
+  extra.classList.toggle("show");
+
+  button.textContent=extra.classList.contains("show")
+    ?"READ LESS −"
+    :"READ MORE +";
+}
+
+/* DOWNLOAD PDF */
+function downloadPDF(){
+  window.print();
+}
+
+</script>
+
+</body>
+</html>
